@@ -15,13 +15,11 @@ def create_commendation(schoolkid, subject):
 
 
 def remove_chastisements(schoolkid):
-    chastisements = Chastisement.objects.filter(schoolkid=schoolkid.id)
-    for chastisement in chastisements:
+    for chastisement in Chastisement.objects.filter(schoolkid=schoolkid):
         chastisement.delete()
 
 
 def fix_marks(schoolkid):
-    marks = Mark.objects.filter(schoolkid=schoolkid.id, points__in=[2, 3])
-    for mark in marks:
+    for mark in Mark.objects.filter(schoolkid=schoolkid, points__in=[2, 3]):
         mark.points = randint(4, 5)
         mark.save()
